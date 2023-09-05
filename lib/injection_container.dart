@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pomodoro_app/features/auth/presentation/bloc/local/sign_in/sign_in_form_bloc.dart';
 import 'package:pomodoro_app/features/daily_news/data/data_sources/local/app_database.dart';
 import 'package:pomodoro_app/features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'package:pomodoro_app/features/daily_news/data/repository/article_repository_impl.dart';
@@ -34,4 +35,5 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<RemoteArticleBloc>(() => RemoteArticleBloc(sl()));
   sl.registerFactory<LocalArticleBloc>(
       () => LocalArticleBloc(sl(), sl(), sl()));
+  sl.registerFactory<SignInFormBloc>(() => SignInFormBloc());
 }

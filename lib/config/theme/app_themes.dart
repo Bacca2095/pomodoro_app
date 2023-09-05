@@ -1,42 +1,53 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Colors.blueGrey;
+final ColorScheme defaultLightScheme =
+    ColorScheme.fromSeed(seedColor: Colors.blueGrey);
 
-ThemeData theme(BuildContext context) {
+final ColorScheme defaultDarkScheme = ColorScheme.fromSeed(
+    seedColor: Colors.blueGrey, brightness: Brightness.dark);
+
+ThemeData theme(
+  BuildContext context,
+  ColorScheme? scheme,
+) {
   return ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: appBarTheme(),
+    appBarTheme:
+        scheme != null ? appBarTheme(scheme) : appBarTheme(defaultLightScheme),
     inputDecorationTheme: InputDecorationTheme(
       floatingLabelBehavior: FloatingLabelBehavior.auto,
       filled: true,
-      fillColor: Colors.grey[200],
       border: UnderlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide.none,
       ),
     ),
-    elevatedButtonTheme: elevatedButtonTheme(context),
-    outlinedButtonTheme: outlinedButtonTheme(context),
-    colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
+    colorScheme: scheme,
+    elevatedButtonTheme: scheme != null
+        ? elevatedButtonTheme(scheme)
+        : elevatedButtonTheme(defaultLightScheme),
+    outlinedButtonTheme: scheme != null
+        ? outlinedButtonTheme(scheme)
+        : outlinedButtonTheme(defaultLightScheme),
     useMaterial3: true,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }
 
-AppBarTheme appBarTheme() {
-  return const AppBarTheme(
+AppBarTheme appBarTheme(ColorScheme scheme) {
+  return AppBarTheme(
     elevation: 0,
     centerTitle: true,
-    iconTheme: IconThemeData(color: Colors.black),
-    titleTextStyle: TextStyle(
+    iconTheme: IconThemeData(color: scheme.primary),
+    titleTextStyle: const TextStyle(
         color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
   );
 }
 
-ElevatedButtonThemeData elevatedButtonTheme(BuildContext context) {
+ElevatedButtonThemeData elevatedButtonTheme(ColorScheme scheme) {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: primaryColor,
-      foregroundColor: Colors.white,
+      backgroundColor: scheme.primary,
+      foregroundColor: scheme.background,
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
       textStyle: const TextStyle(
         fontSize: 16,
@@ -46,7 +57,7 @@ ElevatedButtonThemeData elevatedButtonTheme(BuildContext context) {
   );
 }
 
-OutlinedButtonThemeData outlinedButtonTheme(BuildContext context) {
+OutlinedButtonThemeData outlinedButtonTheme(ColorScheme scheme) {
   return OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),

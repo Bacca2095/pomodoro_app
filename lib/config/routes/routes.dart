@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_app/features/auth/presentation/pages/sign_in/sign_in.dart';
+import 'package:pomodoro_app/features/auth/presentation/pages/sign_in_email/sign_in_email.dart';
 import 'package:pomodoro_app/features/auth/presentation/pages/sign_up/sign_up.dart';
 import 'package:pomodoro_app/features/daily_news/domain/entities/article.dart';
 import 'package:pomodoro_app/features/daily_news/presentation/pages/article_detail/article_detail.dart';
@@ -15,6 +16,9 @@ class AppRoutes {
 
       case '/SignIn':
         return _materialRoute(const SingIn());
+
+      case '/SignInEmail':
+        return _materialRoute(const SingInEmail());
 
       case '/SignUp':
         return _materialRoute(const SingUp());

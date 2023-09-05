@@ -16,12 +16,12 @@ class AuthButtonWidget extends StatelessWidget {
         child: TextButton(
             onPressed: () => onPressed,
             style: TextButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                textStyle: const TextStyle(color: Colors.black),
+                backgroundColor: Theme.of(context).colorScheme.background,
+                foregroundColor: Theme.of(context).colorScheme.onBackground,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
-                    side: const BorderSide(color: Colors.grey)),
+                    side: BorderSide(
+                        color: Theme.of(context).colorScheme.primary)),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                 alignment: Alignment.center),

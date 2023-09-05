@@ -10,8 +10,8 @@ import 'package:pomodoro_app/features/auth/presentation/widgets/auth_button_widg
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pomodoro_app/injection_container.dart';
 
-class SingUp extends HookWidget {
-  const SingUp({super.key});
+class SingInEmail extends HookWidget {
+  const SingInEmail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +29,14 @@ class SingUp extends HookWidget {
     return BlocProvider<SignInFormBloc>(
         create: (_) => sl<SignInFormBloc>(),
         child: BlocBuilder<SignInFormBloc, SignInFormState>(
-            builder: (context, state) {
-          return Center(
+          builder: (context, state) => Center(
               child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(AppLocalizations.of(context)!.sign_up_message,
+                  Text(AppLocalizations.of(context)!.sign_in_with_email_message,
                       style: const TextStyle(
                           fontSize: 32, fontWeight: FontWeight.bold)),
                   Form(
@@ -48,10 +47,10 @@ class SingUp extends HookWidget {
                       shrinkWrap: true,
                       children: [
                         TextFormField(
-                          controller: emailController.value,
-                          keyboardType: TextInputType.emailAddress,
                           validator:
                               ValidationBuilder().required().email().build(),
+                          controller: emailController.value,
+                          keyboardType: TextInputType.emailAddress,
                           onChanged: (value) {
                             BlocProvider.of<SignInFormBloc>(context).add(
                               SignInFormEvent(
@@ -63,17 +62,19 @@ class SingUp extends HookWidget {
                           decoration: InputDecoration(
                             prefixIcon: const Icon(
                               Icons.email,
-                              color: Colors.grey,
                             ),
                             hintText: AppLocalizations.of(context)!.input_email,
-                            hintStyle: const TextStyle(color: Colors.grey),
                           ),
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
                           controller: passwordController.value,
                           keyboardType: TextInputType.visiblePassword,
-                          obscureText: showPassword.value,
+                          validator: ValidationBuilder()
+                              .required()
+                              .minLength(8)
+                              .build(),
+                          obscureText: true,
                           onChanged: (value) {
                             BlocProvider.of<SignInFormBloc>(context).add(
                               SignInFormEvent(
@@ -82,17 +83,12 @@ class SingUp extends HookWidget {
                                   rememberMe: state.rememberMe),
                             );
                           },
-                          validator: ValidationBuilder()
-                              .required()
-                              .minLength(8)
-                              .build(),
                           decoration: InputDecoration(
                             prefixIcon: const Icon(
                               Icons.lock,
                             ),
                             hintText:
                                 AppLocalizations.of(context)!.input_password,
-                            hintStyle: const TextStyle(color: Colors.grey),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 showPassword.value = !showPassword.value;
@@ -131,7 +127,17 @@ class SingUp extends HookWidget {
                           height: 48,
                           child: ElevatedButton(
                             onPressed: () {},
-                            child: Text(AppLocalizations.of(context)!.sing_up),
+                            child: Text(AppLocalizations.of(context)!.sign_in),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 48,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(AppLocalizations.of(context)!
+                                .sign_in_forgot_password),
                           ),
                         ),
                         Stack(
@@ -203,13 +209,14 @@ class SingUp extends HookWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(AppLocalizations.of(context)!.sign_up_account),
+                            Text(AppLocalizations.of(context)!
+                                .sign_in_no_account),
                             TextButton(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/SignIn');
+                                  Navigator.pushNamed(context, '/SignUp');
                                 },
                                 child: Text(
-                                    AppLocalizations.of(context)!.sign_in,
+                                    AppLocalizations.of(context)!.sing_up,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold)))
                           ],
@@ -220,7 +227,7 @@ class SingUp extends HookWidget {
                 ],
               ),
             ),
-          ));
-        }));
+          )),
+        ));
   }
 }

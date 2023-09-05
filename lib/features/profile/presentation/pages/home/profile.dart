@@ -1,4 +1,3 @@
-import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
@@ -15,30 +14,6 @@ class Profile extends HookWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    List<DropdownMenuItem> countryFlags = [
-      DropdownMenuItem(
-        value: 'US',
-        child: CountryFlag.fromCountryCode(
-          'US',
-          height: 16,
-        ),
-      ),
-      DropdownMenuItem(
-        value: 'MX',
-        child: CountryFlag.fromCountryCode(
-          'MX',
-          height: 16,
-        ),
-      ),
-      DropdownMenuItem(
-        value: 'CO',
-        child: CountryFlag.fromCountryCode(
-          'CO',
-          height: 16,
-        ),
-      ),
-    ];
-
     return Center(
         child: SingleChildScrollView(
             child: Padding(
@@ -126,8 +101,9 @@ class Profile extends HookWidget {
                   listTileDivider: const Divider(),
                   backgroundColor: Colors.white,
                   listTilePadding: EdgeInsets.zero,
+                  padding: const EdgeInsets.all(32),
                   searchFieldInputDecoration: const InputDecoration(
-                    hintText: 'Search',
+                    hintText: 'Search country',
                     hintStyle: TextStyle(color: Colors.grey),
                   ))),
           const SizedBox(height: 50),

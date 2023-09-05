@@ -1,0 +1,25 @@
+{
+  "@_GENERAL": {},
+  "input_email": "Correo electrónico",
+  "input_password": "Contraseña",
+  "or_continue": "o continuar con",
+  "or": "o",
+  "remember_me": "Recordarme",
+  "sign_in": "Iniciar sesión",
+  "sing_up": "Regístrate",
+  "@_SIGN_IN": {},
+  "sign_in_continue_with": "Continuar con {provider}",
+  "@sign_in_continue_with": {
+    "placeholders": {
+      "provider": {}
+    }
+  },
+  "sign_in_forgot_password": "¿Olvidaste tu contraseña?",
+  "sign_in_message": "Empecemos",
+  "sign_in_no_account": "¿No tienes una cuenta?",
+  "sign_in_with_email_message": "Ingrese a su cuenta",
+  "sign_in_with_email": "Iniciar sesión con email",
+  "@_SIGN_UP": {},
+  "sign_up_message": "Crear una cuenta",
+  "sign_up_account": "¿Ya tienes una cuenta?"
+}
